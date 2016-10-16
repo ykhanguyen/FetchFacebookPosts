@@ -4,6 +4,12 @@ var app = express();
 const fs = require('fs');
 var request = require('request');
 
+var Clarifai = require('clarifai');
+var app_clarify = new Clarifai.App(
+    'FiQ89n95D_LEr5Rvc3fp38ft7nk7YKRdoI9Ke6u4',
+    'V_VKYfUQOzitktQzsy13Z1Gt9_UxKJdmnlfw8c57'
+);
+
 app.disable('x-powered-by');
 
 app.use(express.static(__dirname));
@@ -17,7 +23,7 @@ app.engine('handlebars', handlebars.engine);
 
 app.set('view engine', 'handlebars');
 
-app.set('port', process.env.PORT || 3336);
+app.set('port', process.env.PORT || 3339);
 
 var FB = require('fb');
 FB.options({version: 'v2.8'});
@@ -55,7 +61,7 @@ passport.use(new FacebookTokenStrategy({
 ));
 */
 
-FB.setAccessToken("EAACEdEose0cBAGZCEi58WkADAFip7HTyZC7DJuJQfH6j4NZBsb4S8ybE17nqGoD22wArfBCbwfGTjGCGxe5OYohoRjR7VmfC1Vrcul7doUIfoI3WEQfJQZBmZAoH4cFDli3W6qdHN7lqMkbJ9zkEq2GF8DSzkSqAimKesfIA2XIQcecH63i7q4FTJGEtQP7CNxgwZBLAyjbAZDZD");
+FB.setAccessToken("EAACEdEose0cBAP5AFrBKHiLeSPBVIc0dJD3uoHNoYRvMkC4x0HfqK81EZAisZBFXLVyvew9K3fUOEg5mtDWxRodiFyIVVJilW3v13y4e6EG05NI94rrpJVYGPByWitIlW1Fg1QlopEzHm2RbNuqHILfs0b9HvmiKPIDCeMmgZDZD");
 FB.api(
     '/me/posts',
     'GET',
@@ -71,12 +77,12 @@ FB.api(
             }
         }
 
-        console.log(result);
+        //console.log(result);
         fetch('https://api.uclassify.com/v1/uclassify/sentiment/Classify?readkey=xQSx6uk7KsVm&text=' + result)
             .then(function(res) {
                 return res.json();
             }).then(function(json) {
-            console.log(json);
+            //console.log(json);
         });
     }
 );
@@ -90,9 +96,53 @@ FB.api(
     {"fields":"images"},
     function(response) {
         // Insert your code here
-
+        var dict_array = [];
         //console.log(response["data"][0]);
-        //console.log(response["data"][5]);
+
+        for (var i = 0; i < response["data"].length && i < 7; i++) {
+            var source = response["data"][i]["images"][0]["source"];
+            var count = 0;
+            var max = Math.min(response["data"].length, 7);
+            var dict = {};
+            var p1 = new Promise(
+                function(resolve, reject) {
+                // predict the contents of an image by passing in a url
+                app_clarify.models.predict(Clarifai.GENERAL_MODEL, source).then(
+                    function(response) {
+                        var concepts = response["data"]["outputs"][0]["data"]["concepts"];
+
+                        count++;
+                        for(var i = 0; i < concepts.length; i++) {
+                            var current = concepts[i].name;
+                            if (typeof dict[current] === "undefined") {
+                                dict[current] = 1;
+                            } else {
+                                dict[current] = dict[current] + 1;
+                            }
+                        }
+                        resolve(count);
+                        //console.log(dict_array);
+
+                    },
+                    function(err) {
+                        console.error(err);
+                        reject(err);
+                    }
+                );
+            });
+            p1.then(
+                function(val) {
+                    if (count == max) {
+                        console.log(dict);
+                    }
+
+                }).catch(
+                function(reason) {
+                    console.log('Handle rejected promise ('+reason+') here.');
+                });
+        };
+
+
     }
 );
 

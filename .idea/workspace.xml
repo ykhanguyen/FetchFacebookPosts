@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/index.js" line="36" />
+    <bookmark url="file://$PROJECT_DIR$/index.js" line="42" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f62f8ba-8b0e-4443-b938-71d9185e7587" name="Default" comment="" />
@@ -28,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -37,8 +37,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="58" column="7" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="7" />
+            <state relative-caret-position="345">
+              <caret line="130" column="18" selection-start-line="130" selection-start-column="18" selection-end-line="130" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -203,12 +203,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1476602039414</updated>
-      <workItem from="1476602041930" duration="17567000" />
+      <workItem from="1476602041930" duration="28674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17567000" />
+    <option name="totallyTimeSpent" value="28674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
@@ -243,7 +243,7 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -258,8 +258,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="58" column="7" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="7" />
+        <state relative-caret-position="345">
+          <caret line="130" column="18" selection-start-line="130" selection-start-column="18" selection-end-line="130" selection-end-column="18" />
           <folding />
         </state>
       </provider>

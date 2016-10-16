@@ -23,7 +23,7 @@ app.engine('handlebars', handlebars.engine);
 
 app.set('view engine', 'handlebars');
 
-app.set('port', process.env.PORT || 3339);
+app.set('port', process.env.PORT || 3340);
 
 var FB = require('fb');
 FB.options({version: 'v2.8'});
@@ -82,7 +82,7 @@ FB.api(
             .then(function(res) {
                 return res.json();
             }).then(function(json) {
-            //console.log(json);
+            console.log(json);
         });
     }
 );
@@ -133,23 +133,38 @@ FB.api(
             p1.then(
                 function(val) {
                     if (count == max) {
-                        console.log(dict);
+                        var sorted = [];
+                        for(var key in dict) {
+                            sorted[sorted.length] = key;
+                        }
+                        sorted.sort();
+                        //console.log(sorted);
+                        result = "";
+                        for (var i = 0; i < sorted.length && i < 5; i++) {
+                            result += sorted[i];
+                        }
+                        //console.log(result);
+                        fetch('https://api.uclassify.com/v1/uclassify/sentiment/Classify?readkey=xQSx6uk7KsVm&text=' + result)
+                            .then(function(res) {
+                                return res.json();
+                            }).then(function(json) {
+                            console.log(json);
+                        });
                     }
+
+
+
 
                 }).catch(
                 function(reason) {
                     console.log('Handle rejected promise ('+reason+') here.');
                 });
+
         };
 
 
     }
 );
-
-
-
-
-
 
 
 app.listen(app.get('port'), function(){

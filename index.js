@@ -6,6 +6,8 @@ var request = require('request');
 
 app.disable('x-powered-by');
 
+app.use(express.static(__dirname));
+
 
 var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 
@@ -15,7 +17,7 @@ app.engine('handlebars', handlebars.engine);
 
 app.set('view engine', 'handlebars');
 
-app.set('port', process.env.PORT || 3334);
+app.set('port', process.env.PORT || 3336);
 
 var FB = require('fb');
 FB.options({version: 'v2.8'});
@@ -38,6 +40,7 @@ FB.api('oauth/access_token', {
 
 
 
+
 /*
 var FacebookTokenStrategy = require('passport-facebook-token');
 
@@ -52,7 +55,7 @@ passport.use(new FacebookTokenStrategy({
 ));
 */
 
-FB.setAccessToken("EAACEdEose0cBAHII80vqERySY0cCRFIwLDyNXM7ZBFUuWi2LoM5MqHV85z1JojZBxv7liwAZCcQeI8417MqfTwSmVXVKlvdvvPZBCPL6wouemfAffAJPFWePDNkBodzZB0x6ZB7B3njLQm6hNsKN5yGg2W9FJShIUvUVTeUeOCjQZDZD");
+FB.setAccessToken("EAACEdEose0cBAGZCEi58WkADAFip7HTyZC7DJuJQfH6j4NZBsb4S8ybE17nqGoD22wArfBCbwfGTjGCGxe5OYohoRjR7VmfC1Vrcul7doUIfoI3WEQfJQZBmZAoH4cFDli3W6qdHN7lqMkbJ9zkEq2GF8DSzkSqAimKesfIA2XIQcecH63i7q4FTJGEtQP7CNxgwZBLAyjbAZDZD");
 FB.api(
     '/me/posts',
     'GET',
@@ -62,6 +65,23 @@ FB.api(
         console.log(response);
     }
 );
+
+
+FB.api(
+    '/me/photos',
+    'GET',
+    {"fields":"images"},
+    function(response) {
+        // Insert your code here
+
+        //console.log(response["data"][0]);
+        //console.log(response["data"][5]);
+    }
+);
+
+
+
+
 
 app.listen(app.get('port'), function(){
     console.log('Express started on http://localhost:' +

@@ -1,0 +1,21 @@
+{
+  "name": "fetchfacebookfeed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "facebook-node": "^0.0.3",
+    "fs": "0.0.1-security",
+    "rapidapi-connect": "0.0.2",
+    "request": "^2.75.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

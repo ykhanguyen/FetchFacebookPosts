@@ -1,5 +1,5 @@
 var express = require('express');
-
+var fetch = require('node-fetch');
 var app = express();
 const fs = require('fs');
 var request = require('request');
@@ -62,9 +62,26 @@ FB.api(
     {},
     function(response) {
         // Insert your code here
-        console.log(response);
+        //console.log(response["data"]);
+        data = response["data"];
+        var result = "";
+        for (var i = 0; i < data.length; i++) {
+            if (typeof data[i]["message"] !== "undefined") {
+                result += data[i]["message"];
+            }
+        }
+
+        console.log(result);
+        fetch('https://api.uclassify.com/v1/uclassify/sentiment/Classify?readkey=xQSx6uk7KsVm&text=' + result)
+            .then(function(res) {
+                return res.json();
+            }).then(function(json) {
+            console.log(json);
+        });
     }
 );
+
+
 
 
 FB.api(
@@ -78,6 +95,8 @@ FB.api(
         //console.log(response["data"][5]);
     }
 );
+
+
 
 
 
